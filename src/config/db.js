@@ -1,4 +1,4 @@
-const {pool, Pool} = require("pg");
+const {Pool} = require("pg");
 require("dotenv").config();
 const DB_CONFIG = {
     host:process.env.DB_HOST,
