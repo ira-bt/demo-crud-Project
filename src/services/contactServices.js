@@ -27,4 +27,18 @@ async function getContacts() {
     
 }
 
-module.exports = {createContact,getContacts};
+//feature 3: get contact by Id
+async function getContactById(id) {
+    try{
+        const result = await pool.query("SELECT * FROM contacts WHERE id = $1",[id]);
+        return result.rows[0];
+    }
+    catch(error)
+    {
+        console.error("Error fetching contacts by ID:",error);
+        throw error;
+    }
+    
+}
+
+module.exports = {createContact,getContacts,getContactById};
