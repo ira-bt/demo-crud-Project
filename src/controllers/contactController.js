@@ -27,4 +27,22 @@ async function getContacts(req,res) {
     
 }
 
-module.exports = {createContact,getContacts};   
+//feature 3: get contact by id
+async function getContactById(req,res) {
+    try{
+        const id = req.params.id;
+        const contact = await contactService.getContactById(id);
+        if(!contact)
+        {
+            return res.status(404).json({message:"Contact not found!"});
+        }
+        res.status(200).json(contact);
+    }
+    catch(error)
+    {
+        res.error(500).json({message:"Server Error"})
+    }
+    
+}
+
+module.exports = {createContact,getContacts,getContactById};   
