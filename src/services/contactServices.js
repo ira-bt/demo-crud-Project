@@ -1,5 +1,5 @@
 const pool = require("../config/db");
-
+//feature 1 : creating contacts
 async function createContact(name, email, phone) {
     try{
         const query = `INSERT INTO contacts(name, email, phone) VALUES ($1,$2,$3) RETURNING *`; 
@@ -13,4 +13,18 @@ async function createContact(name, email, phone) {
     }
 }
 
-module.exports = {createContact};
+//feature 2: getting all contacts
+async function getContacts() {
+    try{
+        const result = await pool.query("SELECT * FROM contacts");
+        return result.rows;
+    }
+    catch(error)
+    {
+        console.error("Error fetching contacts:",error);
+        throw error;
+    }
+    
+}
+
+module.exports = {createContact,getContacts};
