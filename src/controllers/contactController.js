@@ -45,4 +45,25 @@ async function getContactById(req,res) {
     
 }
 
-module.exports = {createContact,getContacts,getContactById};   
+// feature 4: updating contact
+
+async function updateContact(req,res) {
+    try
+    {
+        const id = req.params.id;
+        const {name, email, phone} = req.body;
+        const updated = await contactService.updateContact(id,name,email,phone);
+        if(!updated)
+        {
+            return res.status(404).json({message:"Contanct not found"});
+        }
+        res.status(200).json(updated);
+    }
+    catch(error)
+    {
+        res.status(500).json({message:"Server Error"});
+    }
+    
+}
+
+module.exports = {createContact,getContacts,getContactById,updateContact};   
