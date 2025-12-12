@@ -41,4 +41,24 @@ async function getContactById(id) {
     
 }
 
-module.exports = {createContact,getContacts,getContactById};
+//feature 4: update contact
+async function updateContact(id, name, email, phone) {
+    try
+    {
+        const query = `
+                UPDATE contacts SET name = $1, email = $2, phone = $3
+                WHERE id = $4
+                RETURNING *        
+        `;
+        const result = await pool.query(query,[name,email,phone,id]);
+        return result.rows[0];
+    }
+    catch(error)
+    {
+        console.error("Error Updating a contact!");
+        throw error;
+    }
+    
+}
+
+module.exports = {createContact,getContacts,getContactById,updateContact};
