@@ -1,4 +1,3 @@
-# demo-crud-Project
 # demo-crud-project — Contact Management API
 
 A simple **Node.js + Express + PostgreSQL** CRUD application for managing contacts.  
