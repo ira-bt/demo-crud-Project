@@ -8,4 +8,10 @@ const DB_CONFIG = {
     port:process.env.DB_PORT
 };
 const pool = new Pool(DB_CONFIG);
+
+pool.connect()
+            .then(()=>{console.log("connection established successfully")})
+            .catch(()=>{console.log("Connection establishment failed!")})
+
+
 module.exports = pool;
