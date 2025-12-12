@@ -66,4 +66,20 @@ async function updateContact(req,res) {
     
 }
 
-module.exports = {createContact,getContacts,getContactById,updateContact};   
+//feature 5: delete contact
+async function deleteContact(req,res) {
+    try {
+        const id = req.params.id;
+        const deleted = await contactService.deleteContact(id);
+        if(!deleted)
+        {
+            return res.status(404).json({message:"Contact not found"});
+        }
+        res.status(200).json({message:"Contact Deleted Successfully!"});
+    } catch (error) {
+        res.status(500).json({message:"Server Error"});
+    }
+    
+}
+
+module.exports = {createContact,getContacts,getContactById,updateContact,deleteContact};   

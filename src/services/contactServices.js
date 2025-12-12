@@ -55,10 +55,21 @@ async function updateContact(id, name, email, phone) {
     }
     catch(error)
     {
-        console.error("Error Updating a contact!");
+        console.error("Error Updating a contact!",error);
         throw error;
     }
     
 }
 
-module.exports = {createContact,getContacts,getContactById,updateContact};
+//feature 5: delete contact
+async function deleteContact(id) {
+    try {
+        const result = await pool.query("DELETE FROM contacts WHERE id = $1 RETURNING *",[id]);
+        return result.rows[0];
+    } catch (error) {
+        console.error("Error deleting contact:",error)
+    }
+    
+}
+
+module.exports = {createContact,getContacts,getContactById,updateContact,deleteContact};
